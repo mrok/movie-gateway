@@ -8,7 +8,17 @@ require_once __DIR__.'/../vendor/autoload.php';
 $app = new Silex\Application();
 $app->register(new Silex\Provider\SecurityServiceProvider());
 $app->register(new Silex\Provider\ValidatorServiceProvider());
-
+$app->register(new Silex\Provider\DoctrineServiceProvider(), array(
+    'db.options' => array(
+        'driver'    => 'pdo_mysql',
+        'host'      => '127.0.0.1',
+        'dbname'    => 'movie_gateway',
+        'user'      => 'root',
+        'password'  => '',
+    ),
+));
+$app->register(new Mrok\Provider\PasswordHasherServiceProvider());
+$app['debug'] = true;
 $app['security.firewalls'] = array(
     'http-auth' => array(
         'pattern' => '^/stats',
