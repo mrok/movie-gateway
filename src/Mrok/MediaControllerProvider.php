@@ -21,7 +21,7 @@ class MediaControllerProvider implements ControllerProviderInterface
     {
         $controllers = $app['controllers_factory'];
 
-        $controllers->get('/input', function () {
+        $controllers->get('/add', function () {
             return 'media';
         });
 

@@ -186,18 +186,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpFoundation",
-                "reference": "5803400b1ddc7115cf9c960f83e0b50029ce768e"
+                "reference": "2033da447641cdb2bdeffe4e698c7894e9993985"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/HttpFoundation/zipball/5803400b1ddc7115cf9c960f83e0b50029ce768e",
-                "reference": "5803400b1ddc7115cf9c960f83e0b50029ce768e",
+                "url": "https://github.com/symfony/HttpFoundation/zipball/2033da447641cdb2bdeffe4e698c7894e9993985",
+                "reference": "2033da447641cdb2bdeffe4e698c7894e9993985",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "1349773267",
+            "time": "1349961575",
             "type": "library",
             "extra": {
                 "branch-alias": {
