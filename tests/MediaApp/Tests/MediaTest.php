@@ -26,4 +26,25 @@ class MediaTest extends WebTestCase
         $this->assertEquals(401, $client->getResponse()->getStatusCode());
     }
 
+    /**
+     * @test
+     */
+    public function wrongMovieData()
+    {
+        $postParams = array(
+            'customer_username' => 'test',
+            'customer_password' => 'testcustomer',
+            'filename' => '',
+            'protocol' => '',
+            'host' => '',
+            'username' => 'user',
+            'password' => 'pass',
+            'filePath' => '/upload/may/');
+
+        $client = $this->createClient();
+        $client->request('POST', '/media/add', $postParams);
+
+        $this->assertEquals(400, $client->getResponse()->getStatusCode());
+    }
+
 }

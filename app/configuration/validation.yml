@@ -1,0 +1,20 @@
+Mrok\Entity\Movie:
+  properties:
+    filename:
+      - NotNull: ~
+      - NotBlank: ~
+    protocol:
+      - NotNull: ~
+      - NotBlank: ~
+    host:
+      - NotNull: ~
+      - NotBlank: ~
+    username:
+      - NotNull: ~
+      - NotBlank: ~
+    password:
+      - NotNull: ~
+      - NotBlank: ~
+    filePath:
+      - NotNull: ~
+      - NotBlank: ~

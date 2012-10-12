@@ -26,8 +26,8 @@ class MediaControllerProvider implements ControllerProviderInterface
 
         $controllers->post('/add', function (Request $request) use ($app)
         {
-            $username = $request->get('username');
-            $password = $request->get('password');
+            $username = $request->get('customer_username');
+            $password = $request->get('customer_password');
             $passhash = $app['password-hasher']($username, $password);
 
             $sql = "SELECT * FROM customer WHERE username = ? AND password = ?";
@@ -35,7 +35,10 @@ class MediaControllerProvider implements ControllerProviderInterface
             if ($user) {
                 $movieRepository = new MovieRepository();
                 $movie = $movieRepository->createFromRequest($request);
-
+                $errors = $app['validator']->validate($movie);
+                if (count($errors) > 0) {
+                    return new Response('Bad request', 400);
+                }
 
 
             }

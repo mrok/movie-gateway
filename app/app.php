@@ -18,7 +18,11 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     ),
 ));
 $app->register(new Mrok\Provider\PasswordHasherServiceProvider());
-$app['debug'] = true;
+
+$app['validator.mapping.class_metadata_factory'] = new Symfony\Component\Validator\Mapping\ClassMetadataFactory(
+    new Symfony\Component\Validator\Mapping\Loader\YamlFileLoader(__DIR__.'/configuration/validation.yml')
+);
+
 $app['security.firewalls'] = array(
     'http-auth' => array(
         'pattern' => '^/stats',
