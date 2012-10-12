@@ -17,6 +17,11 @@ class Movie {
     /**
      * @var string
      */
+    public $host;
+
+    /**
+     * @var string
+     */
     public $username;
 
     /**

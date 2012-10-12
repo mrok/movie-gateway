@@ -4,6 +4,7 @@
     "require":{
         "silex/silex":"1.0.*",
         "symfony/security":"2.1.*",
+        "symfony/validator": "2.1.*",
         "doctrine/dbal": "2.2.*"
     },
     "require-dev": {
