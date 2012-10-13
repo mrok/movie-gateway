@@ -5,7 +5,7 @@ namespace Mrok\Repository;
 use Symfony\Component\HttpFoundation\Request;
 use Mrok\Entity\Movie;
 
-class MovieRepository
+class MovieRepository extends RepositoryAbstract
 {
 
     /**

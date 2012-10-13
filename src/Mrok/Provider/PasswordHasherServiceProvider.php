@@ -12,8 +12,7 @@ class PasswordHasherServiceProvider implements ServiceProviderInterface
     /**
      * Registers services on the given app.
      *
-     * This method should only be used to configure services and parameters.
-     * It should not get services.
+     * Provide common password hash functionality
      *
      * @param Application $app An Application instance
      */

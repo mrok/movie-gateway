@@ -34,8 +34,7 @@ class MediaControllerProvider implements ControllerProviderInterface
             $sql = "SELECT * FROM customer WHERE username = ? AND password = ?";
             $user = $app['db']->fetchAssoc($sql, array($username, $passhash));
             if ($user) {
-                $movieRepository = new MovieRepository();
-                $movie = $movieRepository->createFromRequest($request);
+                $movie = $app['repository']['Movie']->createFromRequest($request);
                 $errors = $app['validator']->validate($movie);
                 if (count($errors) > 0) {
                     return new Response('Bad request', 400);
@@ -43,6 +42,11 @@ class MediaControllerProvider implements ControllerProviderInterface
                     $message = new AMQPMessage(json_encode($movie));
                     $queue = $app['rabbitMQ.queues']('movie-gateway');
                     $queue->publish($message);
+
+                    $sql = "UPDATE customer SET amount = amount + 1 WHERE id = ?";
+                    $app['db']->executeUpdate($sql, array($user['id']));
+
+
 
                     return new Response('OK', 200);
                 }

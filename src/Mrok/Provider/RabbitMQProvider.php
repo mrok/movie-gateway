@@ -12,8 +12,8 @@ class RabbitMQProvider implements ServiceProviderInterface
     /**
      * Registers services on the given app.
      *
-     * This method should only be used to configure services and parameters.
-     * It should not get services.
+     * Configure Rabbit connection
+     * make queues available under $app['rabbitMQ.queues'](queueName)
      *
      * @param Application $app An Application instance
      */
@@ -62,10 +62,6 @@ class RabbitMQProvider implements ServiceProviderInterface
 
     /**
      * Bootstraps the application.
-     *
-     * This method is called after all services are registers
-     * and should be used for "dynamic" configuration (whenever
-     * a service must be requested).
      */
     public function boot(Application $app)
     {
