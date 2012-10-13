@@ -1,11 +1,18 @@
 {
     "name":"serek/movie-gateway",
     "minimum-stability":"dev",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/videlalvaro/php-amqplib"
+        }
+    ],
     "require":{
         "silex/silex":"1.0.*",
         "symfony/security":"2.1.*",
         "symfony/validator": "2.1.*",
         "symfony/yaml": "2.1.*",
+        "videlalvaro/php-amqplib" : "master",
         "doctrine/dbal": "2.2.*"
     },
     "require-dev": {

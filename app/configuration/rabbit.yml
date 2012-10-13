@@ -1,0 +1,18 @@
+- name : movie-gateway
+  server:
+    host : 127.0.0.1
+    port : 5672
+    user: guest
+    pass: guest
+    vhost : /
+  parameters :
+    passive: false
+    durable: true
+    exclusive: false
+    auto_delete: false
+  exchange :
+    name : master
+    type: direct
+    passive: false
+    durable: true
+    auto_delete: false
