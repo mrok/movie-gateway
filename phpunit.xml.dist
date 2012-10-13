@@ -12,6 +12,7 @@
     <testsuites>
         <testsuite name="Tests">
             <directory>./tests/</directory>
+            <exclude>./tests/bootstrap.php</exclude>
         </testsuite>
     </testsuites>
 </phpunit>

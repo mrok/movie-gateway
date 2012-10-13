@@ -9,10 +9,7 @@ class MediaTest extends WebTestCase
 
     public function createApplication()
     {
-        $app = require __DIR__ . '/../../../app/app.php';
-        $app['debug'] = true;
-
-        return $app;
+        return require __DIR__ . '/../../bootstrap.php';
     }
 
     /**
@@ -45,6 +42,28 @@ class MediaTest extends WebTestCase
         $client->request('POST', '/media/add', $postParams);
 
         $this->assertEquals(400, $client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * @test
+     */
+    public function correctData()
+    {
+        //TODO mock rabbit
+        $postParams = array(
+            'customer_username' => 'test',
+            'customer_password' => 'testcustomer',
+            'filename' => 'rabbit.mp4',
+            'protocol' => 'ftp',
+            'host' => 'example.com',
+            'username' => 'user',
+            'password' => 'pass',
+            'filePath' => '/upload/may/');
+
+        $client = $this->createClient();
+        $client->request('POST', '/media/add', $postParams);
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
 }

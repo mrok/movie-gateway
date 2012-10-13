@@ -11,7 +11,7 @@
     exclusive: false
     auto_delete: false
   exchange :
-    name : master
+    name : router
     type: direct
     passive: false
     durable: true

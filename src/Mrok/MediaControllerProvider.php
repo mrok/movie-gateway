@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Mrok\Repository\MovieRepository;
 use Mrok\Entity\Movie;
+use PhpAmqpLib\Message\AMQPMessage;
 
 class MediaControllerProvider implements ControllerProviderInterface
 {
@@ -38,9 +39,12 @@ class MediaControllerProvider implements ControllerProviderInterface
                 $errors = $app['validator']->validate($movie);
                 if (count($errors) > 0) {
                     return new Response('Bad request', 400);
+                } else {
+                    $message = new AMQPMessage(json_encode($movie));
+                    $app['rabbitMQ.queues']('movie-gateway')->publish($message);
+
+                    return new Response('OK', 200);
                 }
-
-
             }
 
             return new Response('Unauthorized', 401);

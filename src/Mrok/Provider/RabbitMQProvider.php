@@ -2,6 +2,7 @@
 namespace Mrok\Provider;
 
 use Silex\Application;
+use Mrok\Model\MessagePublisher;
 use Silex\ServiceProviderInterface;
 use PhpAmqpLib\Connection\AMQPConnection;
 
@@ -43,12 +44,15 @@ class RabbitMQProvider implements ServiceProviderInterface
             foreach ($config as $qconf) {
                 $server = $qconf['server'];
                 $qparams = $qconf['parameters'];
+                $eparams = $qconf['exchange'];
 
                 $conn = new AMQPConnection($server['host'], $server['port'], $server['user'], $server['pass'], $server['vhost']);
                 $channel = $conn->channel();
-                $channel->queue_declare($qconf['name'], $qparams['passive'], $qparams['durable'], $qparams['exclusive'], $qparams['auto_delete']);
+                $channel->queue_declare($qconf['name'], $qparams['passive'], $qparams['durable'], $qparams['exclusive'], $qparams['auto_delete']); //be sure queue exists
+                $channel->exchange_declare($eparams['name'], $eparams['type'], $eparams['passive'], $eparams['durable'], $eparams['auto_delete']);
+                $channel->queue_bind($qconf['name'], $eparams['name']);
 
-                $queues[$qconf['name']] = $channel;
+                $queues[$qconf['name']] = new MessagePublisher($channel, $eparams['name']);
             }
             $initialized = true;
 
