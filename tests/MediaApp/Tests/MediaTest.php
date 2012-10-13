@@ -6,7 +6,6 @@ use Silex\WebTestCase;
 
 class MediaTest extends WebTestCase
 {
-
     public function createApplication()
     {
         return require __DIR__ . '/../../bootstrap.php';
@@ -49,7 +48,18 @@ class MediaTest extends WebTestCase
      */
     public function correctData()
     {
-        //TODO mock rabbit
+        $app = $this->createApplication();
+
+        $mediaPublisherMock = $this->getMock('Mrok\Model\MessagePublisher', array('publish'), array(), '', false);
+        $mediaPublisherMock->expects($this->once())
+            ->method('publish');
+        $app['rabbitMQ.queues'] = $app->protect(function ($qname) use ($mediaPublisherMock)
+        {
+            return $mediaPublisherMock;
+        });
+
+        $this->app = $app; //override created app
+
         $postParams = array(
             'customer_username' => 'test',
             'customer_password' => 'testcustomer',

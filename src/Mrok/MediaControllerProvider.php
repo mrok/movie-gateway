@@ -41,7 +41,8 @@ class MediaControllerProvider implements ControllerProviderInterface
                     return new Response('Bad request', 400);
                 } else {
                     $message = new AMQPMessage(json_encode($movie));
-                    $app['rabbitMQ.queues']('movie-gateway')->publish($message);
+                    $queue = $app['rabbitMQ.queues']('movie-gateway');
+                    $queue->publish($message);
 
                     return new Response('OK', 200);
                 }

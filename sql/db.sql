@@ -13,6 +13,7 @@ CREATE  TABLE IF NOT EXISTS `customer` (
   `name` VARCHAR(245) NOT NULL ,
   `username` VARCHAR(75) NOT NULL ,
   `password` VARCHAR(48) NOT NULL ,
+  `amount` INT(5) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) ,
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) )
 ENGINE = InnoDB
