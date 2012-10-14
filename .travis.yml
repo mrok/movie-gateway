@@ -2,7 +2,7 @@ language: php
 
 before_script:
   - composer install --dev
-  - mysql < db.sql
+  - mysql < sql/db.sql
 
 script: ./vendor/bin/phpunit
 
