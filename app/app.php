@@ -39,7 +39,7 @@ $app['security.firewalls'] = array(
     ),
 );
 
-// define controllers for media module
+// define controllers
 $app->mount('/', new Mrok\DefaultControllerProvider());
 $app->mount('/stats', new Mrok\StatsControllerProvider());
 $app->mount('/media', new Mrok\MediaControllerProvider());

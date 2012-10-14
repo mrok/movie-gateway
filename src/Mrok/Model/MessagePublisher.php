@@ -6,7 +6,7 @@ use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Message\AMQPMessage;
 
 /**
- * Exchanche need to be provided together with channel when message is published, this class take care about it.
+ * Exchange need to be provided together with channel when message is published, this class takes care about it.
  */
 class MessagePublisher
 {
@@ -32,6 +32,8 @@ class MessagePublisher
     }
 
     /**
+     * Publish message to queue
+     *
      * @param \PhpAmqpLib\Message\AMQPMessage $msg
      * @param string $exchange - if not provided then one passed in constructor is used
      * @param string $routing_key
