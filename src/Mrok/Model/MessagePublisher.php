@@ -6,7 +6,7 @@ use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Message\AMQPMessage;
 
 /**
- *
+ * Exchanche need to be provided together with channel when message is published, this class take care about it.
  */
 class MessagePublisher
 {
