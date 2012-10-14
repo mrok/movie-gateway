@@ -22,8 +22,10 @@ class StatsControllerProvider implements ControllerProviderInterface
 
         $controllers->get('/', function () use ($app)
         {
-            $app['repository']['Customer']->getAll(); //there is no more than 300customers, no sense to pagginate now
-                 return 'stats';
+            $customers = $app['repository']['Customer']->getAll(); //there is no more than 300customers, no sense to paginate now
+            return $app['twig']->render('stats/list.twig', array(
+                'customers' => $customers,
+            ));
         });
 
         return $controllers;

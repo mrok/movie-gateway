@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <table>
+        <thead>
+            <th>Nr</th>
+            <th>Customer name</th>
+            <th>Added files</th>
+        </thead>
+
+        {% for customer in customers %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.amount }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

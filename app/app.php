@@ -21,6 +21,9 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 $app->register(new Mrok\Provider\PasswordHasherServiceProvider());
 $app->register(new Mrok\Provider\RabbitMQProvider(), array('rabbit.configuration' => Yaml::parse(__DIR__ . '/configuration/rabbit.yml')));
 $app->register(new Mrok\Provider\RepositoryProvider());
+$app->register(new Silex\Provider\TwigServiceProvider(), array(
+    'twig.path' => __DIR__.'/views',
+));
 
 $app['validator.mapping.class_metadata_factory'] = new Symfony\Component\Validator\Mapping\ClassMetadataFactory(
     new Symfony\Component\Validator\Mapping\Loader\YamlFileLoader(__DIR__ . '/configuration/validation.yml')

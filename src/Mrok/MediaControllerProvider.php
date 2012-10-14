@@ -35,6 +35,7 @@ class MediaControllerProvider implements ControllerProviderInterface
             if ($user) {
                 $movie = $app['repository']['Movie']->createFromRequest($request);
                 $movie->customerId = $user['id'];
+                $movie->customerName = $user['name'];
                 $errors = $app['validator']->validate($movie);
                 if (count($errors) > 0) {
                     return new Response('Bad request', 400);

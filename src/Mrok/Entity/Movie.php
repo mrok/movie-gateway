@@ -50,4 +50,9 @@ class Movie {
      * @var int
      */
     public $date;
+
+    /**
+     * @var string
+     */
+    public $customerName;
 }

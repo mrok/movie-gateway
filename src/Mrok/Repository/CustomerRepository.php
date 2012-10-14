@@ -42,4 +42,13 @@ class CustomerRepository extends RepositoryAbstract
         return $this->dao->executeUpdate($sql, array((int)$amount, $id));
     }
 
+    /**
+     * Obtain all customers
+     * @return array
+     */
+    public function getAll()
+    {
+        return $this->dao->fetchAll('SELECT * FROM customer');
+    }
+
 }
