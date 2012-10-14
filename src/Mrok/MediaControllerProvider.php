@@ -31,10 +31,10 @@ class MediaControllerProvider implements ControllerProviderInterface
             $password = $request->get('customer_password');
             $passhash = $app['password-hasher']($username, $password);
 
-            $sql = "SELECT * FROM customer WHERE username = ? AND password = ?";
-            $user = $app['db']->fetchAssoc($sql, array($username, $passhash));
+            $user = $app['repository']['Customer']->getLoggedUser($username, $passhash);
             if ($user) {
                 $movie = $app['repository']['Movie']->createFromRequest($request);
+                $movie->customerId = $user['id'];
                 $errors = $app['validator']->validate($movie);
                 if (count($errors) > 0) {
                     return new Response('Bad request', 400);
@@ -43,10 +43,8 @@ class MediaControllerProvider implements ControllerProviderInterface
                     $queue = $app['rabbitMQ.queues']('movie-gateway');
                     $queue->publish($message);
 
-                    $sql = "UPDATE customer SET amount = amount + 1 WHERE id = ?";
-                    $app['db']->executeUpdate($sql, array($user['id']));
-
-
+                    $app['repository']['Customer']->increaseCustomerMovieCounter($user['id']);
+                    $app['repository']['Movie']->persist($movie);
 
                     return new Response('OK', 200);
                 }
@@ -54,7 +52,6 @@ class MediaControllerProvider implements ControllerProviderInterface
 
             return new Response('Unauthorized', 401);
         });
-
 
         return $controllers;
     }

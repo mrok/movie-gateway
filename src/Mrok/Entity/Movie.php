@@ -41,4 +41,13 @@ class Movie {
      */
     public $tags;
 
+    /**
+     * @var int
+     */
+    public $customerId;
+
+    /**
+     * @var int
+     */
+    public $date;
 }

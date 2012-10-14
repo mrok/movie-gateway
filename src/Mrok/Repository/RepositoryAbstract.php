@@ -3,7 +3,9 @@ namespace Mrok\Repository;
 
 abstract class RepositoryAbstract
 {
-
+    /**
+     * @var Doctrine\DBAL\Connection.
+     */
     protected $dao;
 
     /**

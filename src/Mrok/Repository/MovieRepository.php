@@ -29,5 +29,23 @@ class MovieRepository extends RepositoryAbstract
         return $entity;
     }
 
+    /**
+     * Persist entity in DB
+     * @param \Mrok\Entity\Movie $movie
+     *
+     * @return true/false
+     */
+    public function persist(Movie $movie)
+    {
+        $data = (array)$movie;
+        $data['customer_id'] = $data['customerId'];
+        if (empty($data['date'])) {
+            $data['date'] = date('Y-m-d H:i:s');
+        }
 
+        $columns = array('customer_id', 'filename', 'date', 'tags');
+        $data = array_intersect_key($data, array_combine($columns, $columns));
+
+        $this->dao->insert('movie', $data);
+    }
 }

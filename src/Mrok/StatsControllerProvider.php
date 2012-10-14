@@ -22,6 +22,7 @@ class StatsControllerProvider implements ControllerProviderInterface
 
         $controllers->get('/', function () use ($app)
         {
+            $app['repository']['Customer']->getAll(); //there is no more than 300customers, no sense to pagginate now
                  return 'stats';
         });
 

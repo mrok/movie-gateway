@@ -22,25 +22,25 @@ COLLATE = utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `movies`
+-- Table `movie`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `movies` (
+CREATE  TABLE IF NOT EXISTS `movie` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `filename` VARCHAR(245) NOT NULL ,
-  `when` DATETIME NOT NULL ,
+  `date` DATETIME NOT NULL ,
   `tags` TEXT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-ALTER TABLE `movies` COLLATE = utf8_general_ci , ADD COLUMN `customer_id` INT(10) UNSIGNED NOT NULL  AFTER `id` ,
-  ADD CONSTRAINT `fk_movies_customer`
+ALTER TABLE `movie` COLLATE = utf8_general_ci , ADD COLUMN `customer_id` INT(10) UNSIGNED NOT NULL  AFTER `id` ,
+  ADD CONSTRAINT `fk_movie_customer`
   FOREIGN KEY (`customer_id` )
   REFERENCES `customer` (`id` )
   ON DELETE NO ACTION
   ON UPDATE NO ACTION
-, ADD INDEX `fk_movies_customer_idx` (`customer_id` ASC);
+, ADD INDEX `fk_movie_customer_idx` (`customer_id` ASC);
 
 INSERT INTO `customer` (`name`, `username`, `password`) VALUES ('customer1', 'test', '84f83f37999fa3424fe23a3e2d218070385c625c75a25d09');
 
