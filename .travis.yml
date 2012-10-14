@@ -2,7 +2,8 @@ language: php
 
 before_script:
   - composer install --dev
-  - mysql -e 'create database sql/db.sql;'
+  - mysql < db.sql
+
 script: ./vendor/bin/phpunit
 
 services: mysql
